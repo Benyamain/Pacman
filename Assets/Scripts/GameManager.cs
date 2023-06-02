@@ -92,6 +92,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void PowerPelletEaten(PowerPellet pellet) {
+        // Change ghost state to frightened
+        for (int i = 0; i < this.ghosts.Length; i++) {
+            this.ghosts[i].frightened.Enable(pellet.duration);
+        }
+
         PelletEaten(pellet);
         // Timer in progress will get cancelled and start over again
         CancelInvoke();
