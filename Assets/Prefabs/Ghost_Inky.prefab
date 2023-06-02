@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost_Inky
       objectReference: {fileID: 0}
+    - target: {fileID: 4300772986775597282, guid: 8f8e0d1f245943b4bb26691f580ca843, type: 3}
+      propertyPath: initialBehavior
+      value: 
+      objectReference: {fileID: 2963939656409268220}
     - target: {fileID: 4300772986775597283, guid: 8f8e0d1f245943b4bb26691f580ca843, type: 3}
       propertyPath: initialDirection.y
       value: 1
@@ -69,3 +73,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f8e0d1f245943b4bb26691f580ca843, type: 3}
+--- !u!114 &2963939656409268220 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2817401568816474281, guid: 8f8e0d1f245943b4bb26691f580ca843, type: 3}
+  m_PrefabInstance: {fileID: 1025532797174454101}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537f02b97b76c4e4ea889f6f40d5bb6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost_Clyde
       objectReference: {fileID: 0}
+    - target: {fileID: 4300772986775597282, guid: 8f8e0d1f245943b4bb26691f580ca843, type: 3}
+      propertyPath: initialBehavior
+      value: 
+      objectReference: {fileID: 2963939656409268220, guid: c6979ce130bb0194485b6938a08d75be, type: 3}
     - target: {fileID: 4300772986775597283, guid: 8f8e0d1f245943b4bb26691f580ca843, type: 3}
       propertyPath: initialDirection.y
       value: 1
