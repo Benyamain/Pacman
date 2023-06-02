@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Pellet : MonoBehaviour
 {
-    public int points = 10;
+    public virtual int Points { get { return 10; } }
 
     // Access it from any subclasses
     // Virtual will override it

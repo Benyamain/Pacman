@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour
     {
         pellet.gameObject.SetActive(false);
 
-        SetScore(this.score + pellet.points);
+        SetScore(this.score + pellet.Points);
 
         if (!pelletSFX.isPlaying)
         {
