@@ -36,6 +36,13 @@ public class Movement : MonoBehaviour
         this.enabled = true;
     }
 
+    // Movement checked on every frame
+    private void Update() {
+        if (this.nextDirection != Vector2.zero) {
+            SetDirection(this.nextDirection);
+        }
+    }
+
     // Physics in fixed update so game is consistent since fps varies across different devices
     private void FixedUpdate() {
         Vector2 position = this.rigidbody.position;
@@ -44,11 +51,20 @@ public class Movement : MonoBehaviour
         this.rigidbody.MovePosition(position + translation);
     }
 
-    public void SetDirection(Vector2 direction) {
-
+    // Optional bool
+    public void SetDirection(Vector2 direction, bool forced = false) {
+        if (forced || !Occupied(direction)) {
+            this.direction = direction;
+            this.nextDirection = Vector2.zero;
+        }
+        else {
+            this.nextDirection = direction;
+        }
     }
 
     public bool Occupied(Vector2 direction) {
-        RaycastHit2D hit = Physics2D.BoxCast
+        // Center of object and check boxcasting on the obstacle collisions
+        RaycastHit2D hit = Physics2D.BoxCast(this.transform.position, Vector2.one * 0.75f, 0.0f, direction, 1.5f, this.obstacleLayer);
+        return hit.collider != null;
     }
 }
