@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Transform pellets;
     public int score { get; private set; }
     public int lives { get; private set; }
+    public int ghostMultiplier { get; private set; } = 1;
 
     private void Start() {
         NewGame();
@@ -35,6 +36,8 @@ public class GameManager : MonoBehaviour
     }
 
     private void ResetState() {
+        ResetGhostMultiplier();
+
         for (int i = 0; i < this.ghosts.Length; i++) {
             this.ghosts[i].gameObject.SetActive(true);
         }
@@ -60,7 +63,9 @@ public class GameManager : MonoBehaviour
 
     // Will be triggered by other scripts so public
     public void GhostEaten(Ghost ghost) {
-        SetScore(this.score + ghost.points);
+        int points = ghost.points * this.ghostMultiplier;
+        SetScore(this.score + points);
+        this.ghostMultiplier++;
     }
 
     public void PacmanEaten() {
@@ -73,5 +78,38 @@ public class GameManager : MonoBehaviour
         } else {
             GameOver();
         }
+    }
+
+    public void PelletEaten(Pellet pellet) {
+        pellet.gameObject.SetActive(false);
+
+        SetScore(this.score + pellet.points);
+
+        if (!HasRemainingPellets()) {
+            this.pacman.gameObject.SetActive(false);
+            Invoke(nameof(NewRound), 3f);
+        }
+    }
+
+    public void PowerPelletEaten(PowerPellet pellet) {
+        PelletEaten(pellet);
+        // Timer in progress will get cancelled and start over again
+        CancelInvoke();
+        Invoke(nameof(ResetGhostMultiplier), pellet.duration);
+    }
+
+    private bool HasRemainingPellets() {
+        foreach (Transform pellet in this.pellets) {
+            // Game object is active so there are remaining pellets
+            if (pellet.gameObject.activeSelf) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void ResetGhostMultiplier() {
+        this.ghostMultiplier = 1;
     }
 }
