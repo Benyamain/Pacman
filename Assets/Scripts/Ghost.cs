@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-10)]
+[RequireComponent(typeof(Movement))]
 public class Ghost : MonoBehaviour
 {
     public int points = 200;
@@ -41,6 +43,12 @@ public class Ghost : MonoBehaviour
         if (this.initialBehavior != null) {
             this.initialBehavior.Enable();
         }
+    }
+
+    public void SetPosition(Vector3 position) {
+        // Keep z position the same since it determines draw depth
+        position.z = transform.position.z;
+        transform.position = position;
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {

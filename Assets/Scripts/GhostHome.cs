@@ -13,7 +13,8 @@ public class GhostHome : GhostBehavior
     }
 
     private void OnDisable() {
-        if (this.gameObject.activeSelf) {
+        // Check for active self to prevent error when object is destroyed
+        if (this.gameObject.activeInHierarchy) {
             StartCoroutine(ExitTransition());
         }
     }
@@ -39,9 +40,7 @@ public class GhostHome : GhostBehavior
 
         // Animation
         while (elapsed < duration) {
-            Vector4 newPosition = Vector3.Lerp(position, this.inside.position, elapsed / duration);
-            newPosition.z = position.z;
-            this.ghost.transform.position = newPosition;
+            ghost.SetPosition(Vector3.Lerp(position, inside.position, elapsed / duration));
             elapsed += Time.deltaTime;
             // Waits one frame
             yield return null;
@@ -50,9 +49,7 @@ public class GhostHome : GhostBehavior
         elapsed = 0f;
 
         while (elapsed < duration) {
-            Vector4 newPosition = Vector3.Lerp(this.inside.position, this.outside.position, elapsed / duration);
-            newPosition.z = position.z;
-            this.ghost.transform.position = newPosition;
+            ghost.SetPosition(Vector3.Lerp(this.inside.position, this.outside.position, elapsed / duration));
             elapsed += Time.deltaTime;
             // Waits one frame
             yield return null;

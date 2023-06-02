@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +11,9 @@ public class GameManager : MonoBehaviour
     public int score { get; private set; }
     public int lives { get; private set; }
     public int ghostMultiplier { get; private set; } = 1;
+    public Text gameOverText;
+    public Text scoreText;
+    public Text livesText;
 
     private void Start() {
         NewGame();
@@ -28,6 +32,8 @@ public class GameManager : MonoBehaviour
     }
 
     private void NewRound() {
+        gameOverText.enabled = false;
+
         foreach (Transform pellet in this.pellets) {
             pellet.gameObject.SetActive(true);
         }
@@ -46,6 +52,8 @@ public class GameManager : MonoBehaviour
     }
 
     private void GameOver() {
+        gameOverText.enabled = true;
+
         for (int i = 0; i < this.ghosts.Length; i++) {
             this.ghosts[i].gameObject.SetActive(false);
         }
@@ -55,10 +63,12 @@ public class GameManager : MonoBehaviour
 
     private void SetScore(int score) {
         this.score = score;
+        scoreText.text = score.ToString().PadLeft(2, '0');
     }
 
     private void SetLives(int lives) {
         this.lives = lives;
+        livesText.text = "x" + lives.ToString();
     }
 
     // Will be triggered by other scripts so public
@@ -69,8 +79,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void PacmanEaten() {
-        // No rendered or cannot move
-        this.pacman.gameObject.SetActive(false);
+        pacman.DeathSequence();
+
         SetLives(this.lives - 1);
 
         if (this.lives > 0) {

@@ -15,7 +15,7 @@ public class GhostScatter : GhostBehavior
         if (node != null && this.enabled && !this.ghost.frightened.enabled) {
             int index = Random.Range(0, node.availableDirections.Count);
 
-            if (node.availableDirections[index] == -this.ghost.movement.direction && node.availableDirections.Count > 1) {
+            if (node.availableDirections.Count > 1 && node.availableDirections[index] == -this.ghost.movement.direction) {
                 // Change it to the next available direction so does not reverse back in previous position
                 index++;
 
