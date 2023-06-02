@@ -10,16 +10,33 @@ public class GameManager : MonoBehaviour
     public Transform pellets;
     public int score { get; private set; }
     public int lives { get; private set; }
+    public int apple { get; private set; }
+    public int bell { get; private set; }
+    public int cherry { get; private set; }
+    public int galaxianStarship { get; private set; }
+    public int key { get; private set; }
+    public int strawberry { get; private set; }
+    public int orange { get; private set; }
+    public int melon { get; private set; }
     public int ghostMultiplier { get; private set; } = 1;
     public Text gameOverText;
     public Text scoreText;
     public Text livesText;
+    public Text appleText;
+    public Text bellText;
+    public Text cherryText;
+    public Text melonText;
+    public Text galaxianStarshipText;
+    public Text strawberryText;
+    public Text keyText;
+    public Text orangeText;
     public Text getReadyText;
     public AudioSource pelletSFX;
     public AudioSource ghostEatenSFX;
     public AudioSource frightenedSFX;
     public AudioSource pacmanDeathSFX;
     public AudioSource getReadySFX;
+    public AudioSource fruitEatenSFX;
     private bool canPlay = false;
 
     private void Awake()
@@ -116,6 +133,54 @@ public class GameManager : MonoBehaviour
         livesText.text = "x" + lives.ToString();
     }
 
+    private void SetApples(int apple)
+    {
+        this.apple = apple;
+        appleText.text = "x" + apple.ToString();
+    }
+
+    private void SetBells(int bell)
+    {
+        this.bell = bell;
+        bellText.text = "x" + bell.ToString();
+    }
+
+    private void SetCherries(int cherry)
+    {
+        this.cherry = cherry;
+        cherryText.text = "x" + cherry.ToString();
+    }
+
+    private void SetGalaxianStarship(int galaxianStarship)
+    {
+        this.galaxianStarship = galaxianStarship;
+        galaxianStarshipText.text = "x" + galaxianStarship.ToString();
+    }
+
+    private void SetStrawberries(int strawberry)
+    {
+        this.strawberry = strawberry;
+        strawberryText.text = "x" + strawberry.ToString();
+    }
+
+    private void SetKeys(int key)
+    {
+        this.key = key;
+        keyText.text = "x" + key.ToString();
+    }
+
+    private void SetOranges(int orange)
+    {
+        this.orange = orange;
+        orangeText.text = "x" + orange.ToString();
+    }
+
+    private void SetMelons(int melon)
+    {
+        this.melon = melon;
+        melonText.text = "x" + melon.ToString();
+    }
+
     // Will be triggered by other scripts so public
     public void GhostEaten(Ghost ghost)
     {
@@ -133,6 +198,13 @@ public class GameManager : MonoBehaviour
     {
         pacman.DeathSequence();
 
+        SetLives(this.lives - 1);
+        SetLives(this.lives - 1);
+        SetLives(this.lives - 1);
+        SetLives(this.lives - 1);
+        SetLives(this.lives - 1);
+        SetLives(this.lives - 1);
+        SetLives(this.lives - 1);
         SetLives(this.lives - 1);
 
         if (!pacmanDeathSFX.isPlaying)
