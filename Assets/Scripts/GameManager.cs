@@ -14,14 +14,25 @@ public class GameManager : MonoBehaviour
     public Text gameOverText;
     public Text scoreText;
     public Text livesText;
+    public Text getReadyText;
 
-    private void Start() {
-        NewGame();
+    private void Awake() {
+        getReadyText.enabled = true;
+
+        for (int i = 0; i < this.ghosts.Length; i++) {
+            this.ghosts[i].gameObject.SetActive(false);
+        }
+
+        this.pacman.gameObject.SetActive(false);
     }
 
     private void Update() {
-        if (this.lives <= 0 && Input.anyKeyDown) {
-            NewGame();
+        if (Input.anyKeyDown) {
+            getReadyText.enabled = false;
+            
+            if (this.lives <= 0) {
+                NewGame();
+            }
         }
     }
 
@@ -85,7 +96,8 @@ public class GameManager : MonoBehaviour
 
         if (this.lives > 0) {
             Invoke(nameof(ResetState), 3.0f);
-        } else {
+        }
+        else {
             GameOver();
         }
     }
