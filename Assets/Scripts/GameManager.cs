@@ -82,6 +82,14 @@ public class GameManager : MonoBehaviour
     {
         SetScore(0);
         SetLives(3);
+        SetApples(0);
+        SetBells(0);
+        SetCherries(0);
+        SetGalaxianStarship(0);
+        SetMelons(0);
+        SetOranges(0);
+        SetKeys(0);
+        SetStrawberries(0);
         NewRound();
     }
 
@@ -199,13 +207,6 @@ public class GameManager : MonoBehaviour
         pacman.DeathSequence();
 
         SetLives(this.lives - 1);
-        SetLives(this.lives - 1);
-        SetLives(this.lives - 1);
-        SetLives(this.lives - 1);
-        SetLives(this.lives - 1);
-        SetLives(this.lives - 1);
-        SetLives(this.lives - 1);
-        SetLives(this.lives - 1);
 
         if (!pacmanDeathSFX.isPlaying)
         {
@@ -227,6 +228,47 @@ public class GameManager : MonoBehaviour
         pellet.gameObject.SetActive(false);
 
         SetScore(this.score + pellet.Points);
+
+        // Cherry
+        if (pellet.Points == 100) {
+            fruitEatenSFX.Play();
+            SetCherries(this.cherry + 1);
+        }
+        // Strawberry
+        else if (pellet.Points == 300) {
+            fruitEatenSFX.Play();
+            SetStrawberries(this.strawberry + 1);
+        }
+        // Orange
+        else if (pellet.Points == 500) {
+            fruitEatenSFX.Play();
+            SetOranges(this.orange + 1);
+        }
+        // Apple
+        else if (pellet.Points == 700) {
+            fruitEatenSFX.Play();
+            SetApples(this.apple + 1);
+        }
+        // Melon
+        else if (pellet.Points == 1000) {
+            fruitEatenSFX.Play();
+            SetMelons(this.melon + 1);
+        }
+        // Galaxian Starship
+        else if (pellet.Points == 2000) {
+            fruitEatenSFX.Play();
+            SetGalaxianStarship(this.galaxianStarship + 1);
+        }
+        // Bell
+        else if (pellet.Points == 3000) {
+            fruitEatenSFX.Play();
+            SetBells(this.bell + 1);
+        }
+        // Key
+        else if (pellet.Points == 5000) {
+            fruitEatenSFX.Play();
+            SetKeys(this.key + 1);
+        }
 
         if (!pelletSFX.isPlaying)
         {
